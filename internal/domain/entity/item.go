@@ -10,9 +10,9 @@ type Item struct {
 }
 
 type ItemRepository interface {
-	save(i *Item) error
-	findAll(itemList []Item) error
-	findAllByCategory(cat string, itemList []Item) error
-	findAllByRarity(rarity string, itemList []Item) error
-	getById(id int64, i *Item) error
+	Save(i *Item) error
+	FindAll(itemList []Item) error
+	FindAllByCategory(cat string, itemList []Item) error
+	FindAllByRarity(rarity string, itemList []Item) error
+	GetById(id int64, i *Item) error
 }

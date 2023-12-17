@@ -2,7 +2,7 @@ package main
 
 import (
 	"log"
-	"wondrousBaazar/internal/http"
+	"wondrousBaazar/http"
 )
 
 func main() {

@@ -1,6 +1,8 @@
 package service
 
-import "wondrousBaazar/internal/domain/entity"
+import (
+	"wondrousBaazar/domain/entity"
+)
 
 type ItemService struct {
 	repository entity.ItemRepository

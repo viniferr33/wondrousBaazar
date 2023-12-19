@@ -8,6 +8,8 @@ import (
 
 type Rarity int
 
+var ParseRarityError error = errors.New("invalid rarity")
+
 const (
 	_ Rarity = iota
 	Rare
@@ -27,7 +29,7 @@ func ParseRarity(rarity string) (Rarity, error) {
 	case "wondrous":
 		return Wondrous, nil
 	default:
-		return 0, errors.New("invalid rarity")
+		return 0, ParseRarityError
 	}
 }
 

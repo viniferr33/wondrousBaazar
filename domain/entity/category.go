@@ -8,6 +8,8 @@ import (
 
 type Category int
 
+var ParseCategoryError error = errors.New("invalid category")
+
 const (
 	_ Category = iota
 	Weapon
@@ -25,7 +27,7 @@ func ParseCategory(category string) (Category, error) {
 		return Potion, nil
 
 	default:
-		return 0, errors.New("invalid category")
+		return 0, ParseCategoryError
 	}
 }
 

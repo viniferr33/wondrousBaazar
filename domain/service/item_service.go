@@ -27,6 +27,10 @@ func (s *ItemService) Create(name string, category string, rarity string, cost f
 		return nil, err
 	}
 
+	if cost < 0.0 {
+		return nil, entity.InvalidCostError
+	}
+
 	item := entity.Item{
 		Name:     name,
 		Category: parsedCategory,

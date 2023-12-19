@@ -1,5 +1,9 @@
 package entity
 
+import "errors"
+
+var InvalidCostError error = errors.New("invalid cost")
+
 type Item struct {
 	Id       int64    `json:"id"`
 	Name     string   `json:"name"`

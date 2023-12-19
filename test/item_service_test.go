@@ -57,7 +57,7 @@ func TestItemServiceCreate(t *testing.T) {
 			cost:     110,
 			desc:     "Lorem Ipsum",
 			expected: entity.Item{},
-			err:      errors.New("invalid category"),
+			err:      entity.ParseCategoryError,
 		},
 		{
 			testDesc: "ShouldNotCreateNewItem_InvalidRarity",
@@ -68,7 +68,7 @@ func TestItemServiceCreate(t *testing.T) {
 			cost:     110,
 			desc:     "Lorem Ipsum",
 			expected: entity.Item{},
-			err:      errors.New("invalid rarity"),
+			err:      entity.ParseRarityError,
 		},
 		{
 			testDesc: "ShouldNotCreateNewItem_InvalidCost",
@@ -79,7 +79,7 @@ func TestItemServiceCreate(t *testing.T) {
 			cost:     -100,
 			desc:     "Lorem Ipsum",
 			expected: entity.Item{},
-			err:      errors.New("invalid cost"),
+			err:      entity.InvalidCostError,
 		},
 	}
 
@@ -103,8 +103,10 @@ func TestItemServiceCreate(t *testing.T) {
 				t.Errorf("Received Error: %v\nExpected: %v", err, testCase.err)
 			}
 
-			if *result != testCase.expected {
-				t.Errorf("Received Entity: %v\nExpected: %v", *result, testCase.expected)
+			if result != nil {
+				if *result != testCase.expected {
+					t.Errorf("Received Entity: %v\nExpected: %v", *result, testCase.expected)
+				}
 			}
 		})
 	}

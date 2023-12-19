@@ -1,12 +1,12 @@
 package entity
 
 type Item struct {
-	Id       int64   `json:"id"`
-	Name     string  `json:"name"`
-	Category string  `json:"category"`
-	Rarity   string  `json:"rarity"`
-	Cost     float64 `json:"cost"`
-	Desc     string  `json:"desc"`
+	Id       int64    `json:"id"`
+	Name     string   `json:"name"`
+	Category Category `json:"category"`
+	Rarity   Rarity   `json:"rarity"`
+	Cost     float64  `json:"cost"`
+	Desc     string   `json:"desc"`
 }
 
 type ItemRepository interface {

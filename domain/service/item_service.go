@@ -17,10 +17,20 @@ func NewItemService(repository entity.ItemRepository) *ItemService {
 func (s *ItemService) Create(name string, category string, rarity string, cost float64, desc string) (*entity.Item, error) {
 	var err error
 
+	parsedCategory, err := entity.ParseCategory(category)
+	if err != nil {
+		return nil, err
+	}
+
+	parsedRarity, err := entity.ParseRarity(rarity)
+	if err != nil {
+		return nil, err
+	}
+
 	item := entity.Item{
 		Name:     name,
-		Category: category,
-		Rarity:   rarity,
+		Category: parsedCategory,
+		Rarity:   parsedRarity,
 		Cost:     cost,
 		Desc:     desc,
 	}

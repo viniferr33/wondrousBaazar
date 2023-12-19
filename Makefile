@@ -16,7 +16,7 @@ run: compile
 docker_build:
 	docker build . -t "${IMAGE_NAME}"
 
-compose_up: docker_build
+compose_up:
 	docker compose up -d
 
 compose_down:

@@ -22,5 +22,18 @@ services:
     ports:
       - "${PORT}:${PORT}"
 
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "${PGADMIN_EMAIL}"
+      PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_PASSWORD}"
+    ports:
+      - "3001:80"
+    depends_on:
+      - database
+    volumes:
+      - pgadmin-volume:/var/lib/pgadmin
+
 volumes:
   db-volume:
+  pgadmin-volume:

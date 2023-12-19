@@ -21,3 +21,12 @@ compose_up:
 
 compose_down:
 	docker compose down
+
+migrate_create:
+	docker compose --profile tools run --rm migrate create -ext sql -dir /migrations $(name)
+
+migrate_up:
+	docker compose --profile tools run --rm migrate up
+
+migrate_down:
+	docker compose --profile tools run --rm migrate down

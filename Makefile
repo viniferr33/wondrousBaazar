@@ -30,3 +30,6 @@ migrate_up:
 
 migrate_down:
 	docker compose --profile tools run --rm migrate down
+
+coverage:
+	go test -v -cover ./...

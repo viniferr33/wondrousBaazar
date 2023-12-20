@@ -1,14 +1,13 @@
-package test
+package service
 
 import (
 	"errors"
 	"testing"
 	"wondrousBaazar/domain/entity"
-	"wondrousBaazar/domain/service"
 	"wondrousBaazar/mock"
 )
 
-func TestItemServiceCreate(t *testing.T) {
+func TestItemService_Create(t *testing.T) {
 	type TestCase struct {
 		// Test Config
 		testDesc string
@@ -89,7 +88,7 @@ func TestItemServiceCreate(t *testing.T) {
 				SaveFunc: testCase.saveFunc,
 			}
 
-			s := service.NewItemService(repository)
+			s := NewItemService(repository)
 
 			result, err := s.Create(
 				testCase.name,

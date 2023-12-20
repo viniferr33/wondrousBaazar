@@ -33,3 +33,6 @@ migrate_down:
 
 test:
 	go test -v -cover ./...
+
+integration_test:
+	docker-compose -f docker-compose.test.yml run test

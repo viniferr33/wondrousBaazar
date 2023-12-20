@@ -6,24 +6,19 @@ import (
 	"testing"
 )
 
-func TestCategory_MarshalJSON(t *testing.T) {
+func TestRarity_MarshalJSON(t *testing.T) {
 	type TestCase struct {
 		name     string
-		category Category
+		rarity   Rarity
 		expected string
 		err      error
 	}
 
-	testTable := []TestCase{
-		{"ShouldMarshalWeapon", Weapon, `"Weapon"`, nil},
-		{"ShouldMarshalArtifact", Artifact, `"Artifact"`, nil},
-		{"ShouldMarshalPotion", Potion, `"Potion"`, nil},
-		{"ShouldNotMarshal_InvalidCategory", Category(42), "", ParseCategoryError},
-	}
+	testTable := []TestCase{}
 
 	for _, testCase := range testTable {
 		t.Run(testCase.name, func(t *testing.T) {
-			result, err := json.Marshal(testCase.category)
+			result, err := json.Marshal(testCase.rarity)
 
 			if !errors.Is(err, testCase.err) {
 				t.Errorf("Expected error: %v\nReceived: %v", testCase.err, err)
@@ -36,24 +31,19 @@ func TestCategory_MarshalJSON(t *testing.T) {
 	}
 }
 
-func TestCategory_UnmarshalJSON(t *testing.T) {
+func TestRarity_UnmarshalJSON(t *testing.T) {
 	type TestCase struct {
 		name     string
 		input    string
-		expected Category
+		expected Rarity
 		err      error
 	}
 
-	testTable := []TestCase{
-		{"ShouldUnmarshalWeapon", `"Weapon"`, Weapon, nil},
-		{"ShouldUnmarshalArtifact", `"Artifact"`, Artifact, nil},
-		{"ShouldUnmarshalPotion", `"Potion"`, Potion, nil},
-		{"ShouldNotUnmarshal_InvalidCategory", `"InvalidCategory"`, Category(0), ParseCategoryError},
-	}
+	testTable := []TestCase{}
 
 	for _, testCase := range testTable {
 		t.Run(testCase.name, func(t *testing.T) {
-			var result Category
+			var result Rarity
 			err := json.Unmarshal([]byte(testCase.input), &result)
 
 			if !errors.Is(err, testCase.err) {
@@ -67,23 +57,18 @@ func TestCategory_UnmarshalJSON(t *testing.T) {
 	}
 }
 
-func TestCategory_String(t *testing.T) {
+func TestRarity_String(t *testing.T) {
 	type TestCase struct {
 		name     string
-		category Category
+		rarity   Rarity
 		expected string
 	}
 
-	testTable := []TestCase{
-		{"ShouldStringWeapon", Weapon, "Weapon"},
-		{"ShouldStringArtifact", Artifact, "Artifact"},
-		{"ShouldStringPotion", Potion, "Potion"},
-		{"ShouldNotString_InvalidCategory", Category(42), "Invalid"},
-	}
+	testTable := []TestCase{}
 
 	for _, testCase := range testTable {
 		t.Run(testCase.name, func(t *testing.T) {
-			result := testCase.category.String()
+			result := testCase.rarity.String()
 
 			if result != testCase.expected {
 				t.Errorf("Expected result: %s\nReceived: %s", testCase.expected, result)

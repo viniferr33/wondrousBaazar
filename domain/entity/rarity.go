@@ -48,13 +48,17 @@ func (r *Rarity) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (r *Rarity) String() string {
-	return [...]string{"Invalid", "Rare", "Epic", "Legendary", "Wondrous"}[*r]
+func (r Rarity) String() string {
+	if r > Wondrous {
+		return "Invalid"
+	}
+
+	return [...]string{"Invalid", "Rare", "Epic", "Legendary", "Wondrous"}[r]
 }
 
-func (r *Rarity) MarshalJSON() ([]byte, error) {
-	if *r == 0 {
-		return nil, ParseRarityError
+func (r Rarity) MarshalJSON() ([]byte, error) {
+	if r == 0 || r > Wondrous {
+		return []byte(""), ParseRarityError
 	}
 
 	rarityStr := r.String()

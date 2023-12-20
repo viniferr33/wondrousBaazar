@@ -14,7 +14,13 @@ func TestRarity_MarshalJSON(t *testing.T) {
 		err      error
 	}
 
-	testTable := []TestCase{}
+	testTable := []TestCase{
+		{"ShouldMarshalRare", Rare, `"Rare"`, nil},
+		{"ShouldMarshalEpic", Epic, `"Epic"`, nil},
+		{"ShouldMarshalLegendary", Legendary, `"Legendary"`, nil},
+		{"ShouldMarshalWondrous", Wondrous, `"Wondrous"`, nil},
+		{"ShouldNotMarshal_InvalidRarity", Rarity(42), "", ParseRarityError},
+	}
 
 	for _, testCase := range testTable {
 		t.Run(testCase.name, func(t *testing.T) {
@@ -39,7 +45,13 @@ func TestRarity_UnmarshalJSON(t *testing.T) {
 		err      error
 	}
 
-	testTable := []TestCase{}
+	testTable := []TestCase{
+		{"ShouldUnmarshalRare", `"Rare"`, Rare, nil},
+		{"ShouldUnmarshalEpic", `"Epic"`, Epic, nil},
+		{"ShouldUnmarshalLegendary", `"Legendary"`, Legendary, nil},
+		{"ShouldUnmarshalWondrous", `"Wondrous"`, Wondrous, nil},
+		{"ShouldNotUnmarshal_InvalidRarity", `"InvalidRarity"`, Rarity(0), ParseRarityError},
+	}
 
 	for _, testCase := range testTable {
 		t.Run(testCase.name, func(t *testing.T) {
@@ -64,7 +76,13 @@ func TestRarity_String(t *testing.T) {
 		expected string
 	}
 
-	testTable := []TestCase{}
+	testTable := []TestCase{
+		{"ShouldStringRare", Rare, "Rare"},
+		{"ShouldStringEpic", Epic, "Epic"},
+		{"ShouldStringLegendary", Legendary, "Legendary"},
+		{"ShouldStringWondrous", Wondrous, "Wondrous"},
+		{"ShouldNotString_InvalidRarity", Rarity(42), "Invalid"},
+	}
 
 	for _, testCase := range testTable {
 		t.Run(testCase.name, func(t *testing.T) {

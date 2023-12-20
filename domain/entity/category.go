@@ -46,13 +46,17 @@ func (c *Category) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (c *Category) String() string {
-	return [...]string{"Invalid", "Weapon", "Artifact", "Potion"}[*c]
+func (c Category) String() string {
+	if c > Potion {
+		return "Invalid"
+	}
+
+	return [...]string{"Invalid", "Weapon", "Artifact", "Potion"}[c]
 }
 
-func (c *Category) MarshalJSON() ([]byte, error) {
-	if *c == 0 {
-		return nil, ParseCategoryError
+func (c Category) MarshalJSON() ([]byte, error) {
+	if c == 0 || c > Potion {
+		return []byte(""), ParseCategoryError
 	}
 
 	categoryStr := c.String()
